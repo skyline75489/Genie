@@ -15,6 +15,7 @@ It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple]
 * Generate static html from [Markdown](http://daringfireball.net/projects/markdown/)
 * No tags, No categories, No RSS feed, No Comments...
 * Extremely simple configuration
+* Really easy to use(only one python file)
 
 ## Installation
 
@@ -57,7 +58,7 @@ When you finished your writing, run
 $ python genie.py
 ```
 
-Done! It's really easy, isn't it?
+If everything goes fine, then well done! You have a new blog site now. It's really easy, isn't it?
 
 ## Custom your site!
 
