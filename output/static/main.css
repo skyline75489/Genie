@@ -1,0 +1,35 @@
+.wrapper {
+    margin-left: 20%;
+    margin-right: 20%;
+    border-color: #DDD;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 30px;
+    min-width: 700px !important;
+}
+
+.blog-name {
+    font-size: 1.3em;
+}
+
+.nav:link {
+    margin-left: 5%;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: #000;
+}
+
+.content {
+    margin-top: 5%;
+}
+
+.title:link {
+    font-size: 1.3em;
+    text-decoration: none;
+    color: #000;
+}
+
+a.link {
+	color: #000;
+}
