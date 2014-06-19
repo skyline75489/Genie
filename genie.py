@@ -2,7 +2,7 @@ import os
 import time
 import codecs
 import json
-import misaka as misaka
+import misaka
 
 
 class Post(object):
@@ -93,8 +93,8 @@ class Genie(object):
             files = os.listdir(src_path)
             for f in files:
                 part = os.path.splitext(f)
-                # read markdown files only
-                # part is a tuple like ('file_name', 'ext_name')
+                # Read markdown files only
+                # "Part" is a tuple like ('file_name', 'ext_name')
                 if part[1] in [".md", ".markdown"]:
                     post = Post(src_path, dst_path, part[0], part[1])
                     self.posts.append(post)
@@ -103,7 +103,7 @@ class Genie(object):
         self._read_template_files()
         self._read_post_files()
 
-        # Sort post in modified time ascending
+        # Sort post in last-modified time ascending
         self.posts.sort(lambda p1, p2: cmp(p2.mtime_unix, p1.mtime_unix))
         # Generate html for every post we have
         for post in self.posts:
