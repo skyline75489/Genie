@@ -1,11 +1,11 @@
 Genie
 =====
 
-##The Tinest Static Blog Generator
+##The Simplest Static Blog Generator
 
 Genie is a static blog generator written in python.
 It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple](https://github.com/isnowfy/simple) and
-[Rux](https://github.com/hit9/rux). It is perhaps the tinest blog generator you'll ever seen.
+[Rux](https://github.com/hit9/rux). It is probably the simplest static blog generator you'll ever seen.
 
 ## Demo
 
@@ -14,10 +14,14 @@ It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple]
 
 * Generate static html from [Markdown](http://daringfireball.net/projects/markdown/)
 * No tags, No categories, No RSS feed, No Comments...
-* Extremely simple configuration
+* Extremely simple configuration(only one json file)
 * Really easy to use(only one python file)
+* [Github Flavored Markdown(GFM)](http://github.github.com/github-flavored-markdown/) supported(using [Misaka](http://misaka.61924.nl/))
+* Syntax highlighting supported(using [highlight.js](http://highlightjs.org/))
+
 
 ## Installation
+
 
 Just clone this repo to wherever you like
 
@@ -39,8 +43,8 @@ My settings is like this:
 }
 ```
 
-Write some posts in pure Markdown and save them as ```xxx.md``` in the input path.
-The first line of the file will be the title of the post. So you should write like this:
+Write some posts in Markdown and save them as ```xxx.md``` in the input path. It will generate into ```xxx.html``` in the output path.
+The first line of the file will be the title of the post. So you should write something like this:
 
 ```
 This is the title
@@ -60,7 +64,7 @@ $ python genie.py
 
 If everything goes fine, then well done! You have a new blog site now. It's really easy, isn't it?
 
-## Custom your site!
+## Customize your site!
 
 The templates and the (only) CSS file is quite simple too. You can change them to anything you like!
 
