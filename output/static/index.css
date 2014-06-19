@@ -9,13 +9,22 @@
     min-width: 700px !important;
 }
 
-a {
-	color: #4183C4;
-	text-decoration:none;
+a.nav:visited {
+	color: #000;
 }
 
-a:focus, a:active, a:hover{
+.content a {
+	color: #4183C4;
+	text-decoration:none;
+	background: none repeat scroll 0% 0% transparent;
+}
+
+.content a:focus, a:active, a:hover{
 	text-decoration:underline;
+}
+
+.content a:visited {
+	color: #000;
 }
 
 .blog-name {
@@ -37,10 +46,3 @@ a:focus, a:active, a:hover{
     color: #000;
 }
 
-code {
-	margin: 0px;
-	border: 1px solid #DDD;
-	background-color: #F8F8F8;
-	border-radius: 3px;
-	padding: 0px;
-}
