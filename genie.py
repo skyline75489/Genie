@@ -77,7 +77,7 @@ class Genie(object):
 
     def _read_template_files(self):
         blog_template_file = codecs.open(
-            "./templates/blog_template.html", mode="r", encoding="utf8")
+            "./templates/post_template.html", mode="r", encoding="utf8")
         index_template_file = codecs.open(
             './templates/index_template.html', mode="r", encoding="utf8")
         self.blog_template = blog_template_file.read()
