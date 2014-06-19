@@ -66,7 +66,7 @@ If everything goes fine, then well done! You have a new blog site now. It's real
 
 ## Customize your site!
 
-The templates and the (only) CSS file is quite simple too. You can change them to anything you like!
+The templates and the CSS files is quite simple too. You can change them to anything you like!
 
 ## License
 
