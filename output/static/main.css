@@ -9,6 +9,15 @@
     min-width: 700px !important;
 }
 
+a {
+	color: #4183C4;
+	text-decoration:none;
+}
+
+a:focus, a:active, a:hover{
+	text-decoration:underline;
+}
+
 .blog-name {
     font-size: 1.3em;
 }
@@ -16,7 +25,6 @@
 .nav:link {
     margin-left: 5%;
     font-size: 1.2em;
-    text-decoration: none;
     color: #000;
 }
 
@@ -26,10 +34,13 @@
 
 .title:link {
     font-size: 1.3em;
-    text-decoration: none;
     color: #000;
 }
 
-a.link {
-	color: #000;
+code {
+	margin: 0px;
+	border: 1px solid #DDD;
+	background-color: #F8F8F8;
+	border-radius: 3px;
+	padding: 0px;
 }
