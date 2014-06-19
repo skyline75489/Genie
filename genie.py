@@ -53,7 +53,7 @@ class Genie(object):
     def _generate_index(self):
         post_titles = ""
         for post in self.posts:
-            # The About page, ignore this
+            # The About page, ignore it
             if post.file_name == "about":
                 continue
             post_titles += '<a class="title" href="' + post.dst_name + '">' + \
@@ -93,7 +93,7 @@ class Genie(object):
             files = os.listdir(src_path)
             for f in files:
                 part = os.path.splitext(f)
-                # read .md files only
+                # read markdown files only
                 # part is a tuple like ('file_name', 'ext_name')
                 if part[1] in [".md", ".markdown"]:
                     post = Post(src_path, dst_path, part[0], part[1])
