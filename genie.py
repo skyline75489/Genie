@@ -113,5 +113,5 @@ class Genie(object):
         self._generate_index()
 
 if __name == '__main__':
-        g = Genie()
-        g.update()
+    g = Genie()
+    g.update()
