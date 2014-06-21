@@ -1,6 +1,10 @@
+* {
+	box-sizing: border-box;
+}
+
 .wrapper {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 2em auto;
+	width: 35em;
     border-color: #DDD;
     border-style: solid;
     border-width: 1px;

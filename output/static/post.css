@@ -1,6 +1,10 @@
+* {
+	box-sizing: border-box;
+}
+
 .wrapper {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 2em auto;
+	width: 35em;
     border-color: #DDD;
     border-style: solid;
     border-width: 1px;
@@ -46,10 +50,26 @@ a.nav:visited {
     color: #000;
 }
 
-code {
-	margin: 0px;
-	border: 1px solid #DDD;
-	background-color: #F8F8F8;
+pre {
+	background: #f8f8f8;
+	border: 1px solid #ccc;
+	line-height: 1.428571429;
+	word-break: break-all;
+	word-wrap: break-word;
+	font-size: 13px;
+	overflow: auto;
 	border-radius: 3px;
-	padding: 0px;
+}
+
+code {
+	border: 1px solid #eaeaea;
+	background-color: #f8f8f8;
+	border-radius: 3px;
+	text-shadow: none;
+}
+
+blockquote {
+	border-left: 4px solid #DDD;
+	padding: 0 15px;
+	color: #777;
 }
