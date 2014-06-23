@@ -9,11 +9,11 @@ It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple]
 
 ## Demo
 
-[My Blog(Chinese)](http://skyline75489.github.io/)
+[My Blog(Chinese)](https://skyline75489.github.io/)
 ## Features
 
 * Generate static html from [Markdown](http://daringfireball.net/projects/markdown/)
-* No tags, No categories, No RSS feed, No Comments...
+* No tags, No categories, No RSS feed, No comments...
 * Extremely simple configuration(only one json file)
 * Really easy to use(only one python file)
 * [Github Flavored Markdown(GFM)](http://github.github.com/github-flavored-markdown/) supported(using [Misaka](http://misaka.61924.nl/))
