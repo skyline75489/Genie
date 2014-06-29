@@ -64,6 +64,13 @@ $ python genie.py
 
 If everything goes fine, then well done! You have a new blog site now. It's really easy, isn't it?
 
+If you want to see what it looks like, you can do this:
+
+```bash
+$ cd your-dst-path
+$ python -m SimpleHTTPServer
+```
+
 ## Customize your site!
 
 The templates and the CSS files is quite simple too. You can change them to anything you like!
