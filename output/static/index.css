@@ -2,6 +2,10 @@
 	box-sizing: border-box;
 }
 
+body {
+	font-family: 微软雅黑, serif;
+}
+
 .wrapper {
     margin: 2em auto;
 	width: 35em;
@@ -49,4 +53,3 @@ a.nav:visited {
     font-size: 1.3em;
     color: #000;
 }
-
