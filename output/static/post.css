@@ -73,3 +73,8 @@ blockquote {
 	padding: 0 15px;
 	color: #777;
 }
+
+img {
+    max-width: 100%:
+    max-height: 100%;
+}
