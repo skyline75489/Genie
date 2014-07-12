@@ -17,6 +17,11 @@ body {
     min-width: 700px !important;
 }
 
+.post-time {
+	font-size: 10px;
+	color: red;
+}
+
 a.nav:visited {
 	color: #000;
 }
@@ -79,7 +84,77 @@ blockquote {
 	color: #777;
 }
 
+.footer {
+	margin: 2em auto;
+	width: 35em;
+    border-color: #DDD;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 3px;
+    font-size: 1em;
+    text-align: center;
+    min-width: 700px !important;
+}
+
+.footer a {
+	color: #4183C4;
+	text-decoration:none;
+}
+
+.footer a:visited {
+	color: #4183C4;
+}
+
+.footer a:hover {
+	color: #4183C4;
+	text-decoration: underline;
+}
+
 img {
-    max-width: 100%:
-    max-height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+table{
+	padding:0
+}
+
+table{
+	border-collapse:collapse;
+	border-spacing:0
+}
+
+table tr{
+	border-top:1px solid #ccc;
+	background-color:#fff;
+	margin:0;
+	padding:0
+}
+
+table tr:nth-child(2n){
+	background-color:#f8f8f8
+}
+
+table tr th{
+	font-weight:bold;
+	border:1px solid #ccc;
+	text-align:left;
+	margin:0;
+	padding:6px 13px
+}
+
+table tr td{
+	border:1px solid #ccc;
+	text-align:left;
+	margin:0;
+	padding:6px 13px
+}
+
+table tr th :first-child,.body-html table tr td :first-child{
+	margin-top:0
+}
+
+table tr th :last-child,.body-html table tr td :last-child{
+	margin-bottom:0
 }
