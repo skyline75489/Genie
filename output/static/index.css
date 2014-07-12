@@ -3,7 +3,7 @@
 }
 
 body {
-	font-family: 微软雅黑, Hiragino Sans GB,serif;
+    font-family: 微软雅黑, Hiragino Sans GB, serif;
 }
 
 .wrapper {
@@ -15,6 +15,10 @@ body {
     border-radius: 3px;
     padding: 30px;
     min-width: 700px !important;
+}
+
+.post-time {
+	font-size: 14px;
 }
 
 a.nav:visited {
@@ -53,3 +57,4 @@ a.nav:visited {
     font-size: 1.3em;
     color: #000;
 }
+
