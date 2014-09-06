@@ -18,7 +18,7 @@ class Post(object):
     def __init__(self, src_path, dst_path, file_name, ext_name):
         self.file_name = file_name
         self.ext_name = ext_name
-        self.dst_name = self.file_name + ".html"
+        self.dst_name = "post/" + self.file_name + ".html"
         self.src_full_path = src_path + self.file_name + self.ext_name
         self.dst_full_path = dst_path + self.file_name + ".html"
         # The last-modified time of post file
@@ -56,33 +56,64 @@ class Genie(object):
         self.out_file_path = settings['out_file_path']
         self.blog_name = settings['blog_name']
         
-    def _generate_page_with(self, posts, out_file, current_page=1):
+    def _generate_page_with(self, posts, current_page=1, more_page=False):
         post_titles = ""
+        out_file = ""
+        bottom_nav = ""
+        if current_page == 1:
+            out_file = "index.html"
+        else:
+            out_file = str(current_page) + '.html'
+    
         for post in posts:
             # The About page, ignore it
             if post.file_name == "about":
                 continue
             post_titles += '<div class="entry"><a class="title" href="' + post.dst_name + '">' + \
                 post.title + '</a><span class="date">' + post.mtime + '</span></div>\n'
-
+        
+        if current_page > 1:
+            previous_page = None
+            if current_page == 2:
+                previous_page = "index.html"
+            else:
+                previous_page =  str(current_page - 1) + ".html"
+            bottom_nav += '<div class="previous"><a href="' + previous_page + '">Previous</a></div>'
+        if more_page:
+            next_page = str(current_page + 1) + ".html"
+            bottom_nav += '<div class="next"><a href="' + next_page + '">Next</a></div>'
         result = self.index_template.format(
-            content=post_titles, blog_name=self.blog_name, bottom_nav="").encode('utf-8')
+            content=post_titles, blog_name=self.blog_name, bottom_nav=bottom_nav).encode('utf-8')
 
-        fout = open(self.out_file_path + out_file, "w")
+        fout = open(self.out_file_path + out_file, "w+")
         fout.write(result)
         fout.close()
         
     def _generate_index(self):
         start = 0
         end = self.MAX_POSTS_PER_PAGE
-        self._generate_page_with(self.posts, 'index.html')
-
+        page = 1
+        if len(self.posts) <= self.MAX_POSTS_PER_PAGE:
+            self._generate_page_with(self.posts, current_page=page, more_page=False)
+            return
+        else:
+            self._generate_page_with(self.posts[start:end], current_page=page, more_page=True)
+            page += 1
+            while end <= len(self.posts):
+                start = end
+                end += self.MAX_POSTS_PER_PAGE
+                more = True
+                if end > len(self.posts):
+                    more = False
+                self._generate_page_with(self.posts[start:end], current_page=page, more_page = more)
+                page += 1
+                
     def _generate_post(self, text, out_file_name):
         html = misaka.html(text, extensions=self.ext)
         result = self.blog_template.format(
             content=html, blog_name=self.blog_name).encode('utf-8')
 
-        fout = open(out_file_name, "w")
+        fout = open(out_file_name, "w+")
         fout.write(result)
         fout.close()
         
@@ -102,7 +133,7 @@ class Genie(object):
     def _get_posts(self):
 
         src_path = self.in_file_path
-        dst_path = self.out_file_path
+        dst_path = self.out_file_path + 'post/'
         if os.path.isdir(src_path):
             files = os.listdir(src_path)
             for f in files:

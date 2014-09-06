@@ -24,7 +24,16 @@ body {
 .date {
 	font-size: 0.8em;
     float:right;
-    margin-top:6px;
+    margin-top:7px;
+}
+
+.next {
+    margin-top:5px;
+    float:right;
+}
+
+.previous {
+    margin-top:5px;
 }
 
 a.nav:visited {
