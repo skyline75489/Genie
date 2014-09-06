@@ -17,8 +17,14 @@ body {
     min-width: 700px !important;
 }
 
-.post-time {
-	font-size: 14px;
+.entry {
+    margin-bottom:4px;
+}
+
+.date {
+	font-size: 0.8em;
+    float:right;
+    margin-top:6px;
 }
 
 a.nav:visited {
