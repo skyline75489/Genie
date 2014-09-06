@@ -28,12 +28,31 @@ body {
 }
 
 .next {
-    margin-top:5px;
-    float:right;
+    margin-top:15px;
+    text-align:right;
+    color: #000;
 }
 
 .previous {
-    margin-top:5px;
+    margin-top:15px;
+}
+
+.next a{
+    color: #000;
+	text-decoration:none;
+}
+
+.next a:focus, a:active, a:hover{
+	text-decoration:underline;
+}
+
+.previous a{
+    color: #000;
+	text-decoration:none;
+}
+
+.previous a:focus, a:active, a:hover{
+	text-decoration:underline;
 }
 
 a.nav:visited {
