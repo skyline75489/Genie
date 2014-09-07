@@ -23,7 +23,9 @@ class Post(object):
         self.dst_full_path = dst_path + self.file_name + ".html"
         # The last-modified time of post file
         self.mtime_unix = os.path.getmtime(self.src_full_path)
+        self.ctime_unix = os.path.getctime(self.src_full_path)
         self.mtime = time.ctime(self.mtime_unix)
+        self.ctime = time.ctime(self.ctime_unix)
         f = codecs.open(self.src_full_path, mode="r", encoding="utf8")
         # Use the first line as post title
         self.title = f.readline()
@@ -70,7 +72,7 @@ class Genie(object):
             if post.file_name == "about":
                 continue
             post_titles += '<div class="entry"><a class="title" href="' + post.dst_name + '">' + \
-                post.title + '</a><span class="date">' + post.mtime + '</span></div>\n'
+                post.title + '</a><span class="date">' + post.ctime + '</span></div>\n'
         
         if current_page > 1:
             previous_page = None
@@ -145,8 +147,8 @@ class Genie(object):
                     self.posts.append(post)
                     
     def _render(self):
-        # Sort post in last-modified time ascending
-        self.posts.sort(lambda p1, p2: cmp(p2.mtime_unix, p1.mtime_unix))
+        # Sort post in createe time ascending
+        self.posts.sort(lambda p1, p2: cmp(p2.ctime_unix, p1.ctime_unix))
         # Generate html for every post we have
         for post in self.posts:
             raw_text = post.text
