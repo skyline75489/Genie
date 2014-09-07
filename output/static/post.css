@@ -68,11 +68,14 @@ pre {
 	border-radius: 3px;
 }
 
-code {
-	border: 1px solid #eaeaea;
-	border-radius: 3px;
-	text-shadow: none;
-	font-family: Menlo, Droid Sans Mono, Consolas, Monospace;
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  border: 1px solid #eaeaea;
+  background-color: #f0f0f0;
+  border-radius: 3px; 
+  font-family: Menlo, Droid Sans Mono, Consolas, Monospace;
+  text-shadow: none;
 }
 
 blockquote {
