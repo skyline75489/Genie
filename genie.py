@@ -6,8 +6,8 @@ import logging
 
 import misaka
 
-
-logger = logging.getLogger()
+def logger(str):
+    print(str)
 
 class Post(object):
 
@@ -142,18 +142,21 @@ class Genie(object):
                 part = os.path.splitext(f)
                 # Read markdown files only
                 # "Part" is a tuple like ('file_name', 'ext_name')
-                if part[1] in [".md", ".markdown"]:
+                if part[1] in [".md", ".markdown", '.mdown', '.mkd', '.mkdn']:
                     post = Post(src_path, dst_path, part[0], part[1])
                     self.posts.append(post)
+                    
+        logger('Find {0} articles'.format(len(self.posts)))
                     
     def _render(self):
         # Sort post in createe time ascending
         self.posts.sort(lambda p1, p2: cmp(p2.ctime_unix, p1.ctime_unix))
         # Generate html for every post we have
+        logger('Start rendering')
         for post in self.posts:
             raw_text = post.text
             self._generate_post(raw_text, post.dst_full_path)
-
+        logger('Done')
         self._generate_index()
                 
     def update(self):
