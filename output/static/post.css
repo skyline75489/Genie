@@ -3,7 +3,11 @@
 }
 
 body {
-	font-family: 微软雅黑, Hiragino Sans GB,serif;
+	font-family: 微软雅黑, Hiragino Sans GB, serif;
+}
+
+p {
+    line-height:1.5em;
 }
 
 .wrapper {
