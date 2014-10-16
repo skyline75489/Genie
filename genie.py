@@ -13,7 +13,8 @@ def logger(str):
 
 class Post(object):
 
-    """Post class stores the information
+    """
+    Post class stores the information needed
     about the post
     """
 
@@ -29,7 +30,7 @@ class Post(object):
         self.mtime = time.ctime(self.mtime_unix)
         self.ctime = time.ctime(self.ctime_unix)
         f = codecs.open(self.src_full_path, mode="r", encoding="utf8")
-        # Use the first line as post title
+        # Use the first line as title
         self.title = f.readline()
         f.seek(0)
         self.text = f.read()
@@ -40,7 +41,8 @@ class Genie(object):
     MAX_POSTS_PER_PAGE = 15
 
     def __init__(self):
-        """Initialize misaka Markdown parser 
+        """
+        Initialize misaka Markdown parser 
         and settings
         """
         self._load_settings()
@@ -70,9 +72,10 @@ class Genie(object):
             out_file = str(current_page) + '.html'
 
         for post in posts:
-            # The About page, ignore it
+            # The About page, ignore it.
             if post.file_name == "about":
                 continue
+            # Generate post entry.
             post_titles += '<div class="entry"><a class="title" href="' + post.dst_name + '">' + \
                 post.title + '</a><span class="date">' + \
                 post.ctime + '</span></div>\n'
@@ -85,6 +88,7 @@ class Genie(object):
                 previous_page = str(current_page - 1) + ".html"
             bottom_nav += '<div class="previous"><a href="' + \
                 previous_page + '">Previous</a></div>'
+        # More pages there.
         if more_page:
             next_page = str(current_page + 1) + ".html"
             bottom_nav += '<div class="next"><a href="' + \
@@ -127,9 +131,6 @@ class Genie(object):
         fout.write(result)
         fout.close()
 
-    def _generate_archive(self):
-        pass
-
     def _get_templates(self):
         blog_template_file = codecs.open(
             "./templates/post_template.html", mode="r", encoding="utf8")
@@ -141,7 +142,6 @@ class Genie(object):
         index_template_file.close()
 
     def _get_posts(self):
-
         src_path = self.in_file_path
         dst_path = self.out_file_path + 'post/'
         if os.path.isdir(src_path):
@@ -157,7 +157,7 @@ class Genie(object):
         logger('Find {0} articles'.format(len(self.posts)))
 
     def _render(self):
-        # Sort post in createe time ascending
+        # Sort post in create time ascending
         self.posts.sort(lambda p1, p2: cmp(p2.ctime_unix, p1.ctime_unix))
         # Generate html for every post we have
         logger('Start rendering')
@@ -172,6 +172,10 @@ class Genie(object):
         self._get_posts()
         self._render()
 
-if __name__ == '__main__':
+
+def main():
     g = Genie()
     g.update()
+
+if __name__ == '__main__':
+    main()
