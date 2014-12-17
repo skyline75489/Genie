@@ -30,9 +30,12 @@ class Post(object):
         self.dst_name = "post/" + self.filename + ".html"
         self.src_full_path = src_path + self.filename + self.ext_name
         self.dst_full_path = dst_path + self.filename + ".html"
-
-        self.create_time = parse_filename(self.filename)
-        self.create_time_str = time.strftime("%d %b %Y", self.create_time)
+        
+        if self.filename == 'about':
+            self.create_time = time.time()
+        else:
+            self.create_time = parse_filename(self.filename)
+            self.create_time_str = time.strftime("%d %b %Y", self.create_time)
 
         f = codecs.open(self.src_full_path, mode="r", encoding="utf8")
         # Use the first line as title
@@ -78,7 +81,7 @@ class Genie(object):
 
         for post in posts:
             # The About page, ignore it.
-            if post.filename.split('_')[1] == "about":
+            if post.filename == "about":
                 continue
             # Generate post entry.
             post_titles += '<div class="entry"><a class="title" href="' + post.dst_name + '">' + \
