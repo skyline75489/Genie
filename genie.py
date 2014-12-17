@@ -6,10 +6,16 @@ import logging
 
 import misaka
 
-
 def logger(str):
     print(str)
 
+def parse_filename(filename):
+    date = filename.split('_')[0]
+    try:
+        dt = time.strptime(date, "%Y-%m-%d")
+    except ValueError:
+        raise Exception('Post filename is invalid')
+    return dt
 
 class Post(object):
 
@@ -18,17 +24,16 @@ class Post(object):
     about the post
     """
 
-    def __init__(self, src_path, dst_path, file_name, ext_name):
-        self.file_name = file_name
+    def __init__(self, src_path, dst_path, filename, ext_name):
+        self.filename = filename
         self.ext_name = ext_name
-        self.dst_name = "post/" + self.file_name + ".html"
-        self.src_full_path = src_path + self.file_name + self.ext_name
-        self.dst_full_path = dst_path + self.file_name + ".html"
-        # The last-modified time of post file
-        self.mtime_unix = os.path.getmtime(self.src_full_path)
-        self.ctime_unix = os.path.getctime(self.src_full_path)
-        self.mtime = time.ctime(self.mtime_unix)
-        self.ctime = time.ctime(self.ctime_unix)
+        self.dst_name = "post/" + self.filename + ".html"
+        self.src_full_path = src_path + self.filename + self.ext_name
+        self.dst_full_path = dst_path + self.filename + ".html"
+
+        self.create_time = parse_filename(self.filename)
+        self.create_time_str = time.strftime("%d %b %Y", self.create_time)
+
         f = codecs.open(self.src_full_path, mode="r", encoding="utf8")
         # Use the first line as title
         self.title = f.readline()
@@ -73,12 +78,12 @@ class Genie(object):
 
         for post in posts:
             # The About page, ignore it.
-            if post.file_name == "about":
+            if post.filename.split('_')[1] == "about":
                 continue
             # Generate post entry.
             post_titles += '<div class="entry"><a class="title" href="' + post.dst_name + '">' + \
                 post.title + '</a><span class="date">' + \
-                post.ctime + '</span></div>\n'
+                post.create_time_str + '</span></div>\n'
 
         if current_page > 1:
             previous_page = None
@@ -149,7 +154,7 @@ class Genie(object):
             for f in files:
                 part = os.path.splitext(f)
                 # Read markdown files only
-                # "Part" is a tuple like ('file_name', 'ext_name')
+                # "Part" is a tuple like ('filename', 'ext_name')
                 if part[1] in [".md", ".markdown", '.mdown', '.mkd', '.mkdn']:
                     post = Post(src_path, dst_path, part[0], part[1])
                     self.posts.append(post)
@@ -158,7 +163,7 @@ class Genie(object):
 
     def _render(self):
         # Sort post in create time ascending
-        self.posts.sort(lambda p1, p2: cmp(p2.ctime_unix, p1.ctime_unix))
+        self.posts.sort(lambda p1, p2: cmp(p2.create_time, p1.create_time))
         # Generate html for every post we have
         logger('Start rendering')
         for post in self.posts:
