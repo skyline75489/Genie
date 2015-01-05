@@ -71,6 +71,8 @@ class Genie(object):
         self.blog_name = settings['blog_name']
 
     def _generate_page_with(self, posts, current_page=1, more_page=False):
+        if not posts:
+            return 
         post_titles = ""
         out_file = ""
         bottom_nav = ""
@@ -88,19 +90,21 @@ class Genie(object):
                 post.title + '</a><span class="date">' + \
                 post.create_time_str + '</span></div>\n'
 
-        if current_page > 1:
+        if current_page == 1:
+            bottom_nav += '<span class="previous"><a href="">&nbsp</a></span>'      
+        elif current_page > 1:
             previous_page = None
             if current_page == 2:
                 previous_page = "index.html"
             else:
                 previous_page = str(current_page - 1) + ".html"
-            bottom_nav += '<div class="previous"><a href="' + \
-                previous_page + '">Previous</a></div>'
+            bottom_nav += '<span class="previous"><a href="' + \
+                previous_page + '">Previous</a></span>'
         # More pages there.
         if more_page:
             next_page = str(current_page + 1) + ".html"
-            bottom_nav += '<div class="next"><a href="' + \
-                next_page + '">Next</a></div>'
+            bottom_nav += '<span class="next"><a href="' + \
+                next_page + '">Next</a></span>'
         result = self.index_template.format(
             content=post_titles, blog_name=self.blog_name, bottom_nav=bottom_nav).encode('utf-8')
 
@@ -124,7 +128,7 @@ class Genie(object):
                 start = end
                 end += self.MAX_POSTS_PER_PAGE
                 more = True
-                if end > len(self.posts):
+                if end >= len(self.posts):
                     more = False
                 self._generate_page_with(
                     self.posts[start:end], current_page=page, more_page=more)

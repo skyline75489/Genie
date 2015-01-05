@@ -30,14 +30,13 @@ body {
     margin-top:6px;
 }
 
-.next {
-    margin-top:15px;
-    text-align:right;
-    color: #000;
+.bottom_nav {
+    margin-top:10px;
 }
-
-.previous {
-    margin-top:15px;
+.next {
+    margin-right:0px;
+    float:right;
+    color: #000;
 }
 
 .next a{
