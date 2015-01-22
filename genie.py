@@ -53,8 +53,9 @@ class Genie(object):
         Initialize misaka Markdown parser 
         and settings
         """
-        self._load_settings()
+        self.load_settings()
         self.posts = []
+        self.about = None
         self.ext = (
             misaka.EXT_STRIKETHROUGH |
             misaka.EXT_NO_INTRA_EMPHASIS |
@@ -63,14 +64,14 @@ class Genie(object):
             misaka.EXT_FENCED_CODE
         )
 
-    def _load_settings(self):
+    def load_settings(self):
         f = open("genie.settings", "r")
         settings = json.load(f)
         self.in_file_path = settings['in_file_path']
         self.out_file_path = settings['out_file_path']
         self.blog_name = settings['blog_name']
 
-    def _generate_page_with(self, posts, current_page=1, more_page=False):
+    def generate_page_with(self, posts, current_page=1, more_page=False):
         if not posts:
             return 
         post_titles = ""
@@ -112,7 +113,7 @@ class Genie(object):
         fout.write(result)
         fout.close()
 
-    def _generate_index(self):
+    def generate_index(self):
         start = 0
         end = self.MAX_POSTS_PER_PAGE
         page = 1
@@ -121,20 +122,21 @@ class Genie(object):
                 self.posts, current_page=page, more_page=False)
             return
         else:
-            self._generate_page_with(
+            self.generate_page_with(
                 self.posts[start:end], current_page=page, more_page=True)
             page += 1
-            while end <= len(self.posts):
+            while end < len(self.posts):
                 start = end
                 end += self.MAX_POSTS_PER_PAGE
                 more = True
                 if end >= len(self.posts):
+                    end = len(self.posts)
                     more = False
-                self._generate_page_with(
+                self.generate_page_with(
                     self.posts[start:end], current_page=page, more_page=more)
                 page += 1
 
-    def _generate_post(self, text, out_file_name):
+    def generate_post(self, text, out_file_name):
         html = misaka.html(text, extensions=self.ext)
         result = self.blog_template.format(
             content=html, blog_name=self.blog_name).encode('utf-8')
@@ -143,7 +145,7 @@ class Genie(object):
         fout.write(result)
         fout.close()
 
-    def _get_templates(self):
+    def get_templates(self):
         blog_template_file = codecs.open(
             "./templates/post_template.html", mode="r", encoding="utf8")
         index_template_file = codecs.open(
@@ -153,36 +155,42 @@ class Genie(object):
         blog_template_file.close()
         index_template_file.close()
 
-    def _get_posts(self):
+    def get_posts(self):
         src_path = self.in_file_path
         dst_path = self.out_file_path + 'post/'
         if os.path.isdir(src_path):
             files = os.listdir(src_path)
             for f in files:
-                part = os.path.splitext(f)
+                prefix, ext = os.path.splitext(f)
                 # Read markdown files only
-                # "Part" is a tuple like ('filename', 'ext_name')
-                if part[1] in [".md", ".markdown", '.mdown', '.mkd', '.mkdn']:
-                    post = Post(src_path, dst_path, part[0], part[1])
+                if ext in [".md", ".markdown", '.mdown', '.mkd', '.mkdn']:
+                    post = Post(src_path, dst_path, prefix, ext)
+                    if prefix.endswith('about'):
+                        self.about = post
                     self.posts.append(post)
+                
+        posts_count = len(self.posts)
+        if self.about:
+            posts_count -= 1
+        logger('Find {0} articles'.format(posts_count))
 
-        logger('Find {0} articles'.format(len(self.posts)))
-
-    def _render(self):
+    def render(self):
         # Sort post in create time ascending
         self.posts.sort(lambda p1, p2: cmp(p2.create_time, p1.create_time))
         # Generate html for every post we have
         logger('Start rendering')
         for post in self.posts:
             raw_text = post.text
-            self._generate_post(raw_text, post.dst_full_path)
+            self.generate_post(raw_text, post.dst_full_path)
         logger('Done')
-        self._generate_index()
+        if self.about:
+            self.posts.remove(self.about)
+        self.generate_index()
 
     def update(self):
-        self._get_templates()
-        self._get_posts()
-        self._render()
+        self.get_templates()
+        self.get_posts()
+        self.render()
 
 
 def main():
