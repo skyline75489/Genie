@@ -3,7 +3,7 @@ Genie
 
 ##The Simplest Static Blog Generator
 
-### NOTE: Genie is currently in development and not useable for end user.
+### NOTE: Genie is currently under development and may not be ready for production.
 
 Genie is a static blog generator written in python.
 It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple](https://github.com/isnowfy/simple) and
