@@ -21,7 +21,7 @@ body {
 }
 
 .entry {
-    margin-bottom:4px;
+    padding: 1em 0px 0.3em;
 }
 
 .date {

@@ -46,8 +46,8 @@ class Post(object):
 
 class Genie(object):
 
-    MAX_POSTS_PER_PAGE = 15
-
+    MAX_POSTS_PER_PAGE = 10
+    
     def __init__(self):
         """
         Initialize misaka Markdown parser 
