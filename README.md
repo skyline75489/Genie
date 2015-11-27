@@ -22,6 +22,11 @@ It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple]
 * Syntax highlighting supported(using [highlight.js](http://highlightjs.org/))
 
 
+## Requirements
+
+* libffi (brew install libffi)
+* misaka (pip install misaka)
+
 ## Installation
 
 
