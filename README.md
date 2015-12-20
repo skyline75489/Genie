@@ -18,14 +18,13 @@ It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple]
 * No tags, No categories, No RSS feed, No comments...
 * Extremely simple configuration(only one json file)
 * Really easy to use(only one python file)
-* [Github Flavored Markdown(GFM)](http://github.github.com/github-flavored-markdown/) supported(using [Misaka](http://misaka.61924.nl/))
+* [Github Flavored Markdown(GFM)](http://github.github.com/github-flavored-markdown/) supported(using [Mistune](https://github.com/lepture/mistune))
 * Syntax highlighting supported(using [highlight.js](http://highlightjs.org/))
 
 
 ## Requirements
 
-* libffi (brew install libffi)
-* misaka (pip install misaka)
+* mistune (pip install mistune)
 
 ## Installation
 

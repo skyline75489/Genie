@@ -4,7 +4,7 @@ import codecs
 import json
 import logging
 
-import misaka
+import mistune
 
 def logger(str):
     print(str)
@@ -50,19 +50,11 @@ class Genie(object):
     
     def __init__(self):
         """
-        Initialize misaka Markdown parser 
-        and settings
+        Initialize settings
         """
         self.load_settings()
         self.posts = []
         self.about = None
-        self.ext = (
-            misaka.EXT_STRIKETHROUGH |
-            misaka.EXT_NO_INTRA_EMPHASIS |
-            misaka.EXT_AUTOLINK |
-            misaka.EXT_TABLES |
-            misaka.EXT_FENCED_CODE
-        )
 
     def load_settings(self):
         f = open("genie.settings", "r")
@@ -137,7 +129,7 @@ class Genie(object):
                 page += 1
 
     def generate_post(self, text, out_file_name):
-        html = misaka.html(text, extensions=self.ext)
+        html = mistune.markdown(text)
         result = self.blog_template.format(
             content=html, blog_name=self.blog_name).encode('utf-8')
 
