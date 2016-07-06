@@ -110,7 +110,7 @@ class Genie(object):
         end = self.MAX_POSTS_PER_PAGE
         page = 1
         if len(self.posts) <= self.MAX_POSTS_PER_PAGE:
-            self._generate_page_with(
+            self.generate_page_with(
                 self.posts, current_page=page, more_page=False)
             return
         else:
@@ -129,7 +129,7 @@ class Genie(object):
                 page += 1
 
     def generate_post(self, text, out_file_name):
-        html = mistune.markdown(text)
+        html = mistune.markdown(text, escape=False)
         result = self.blog_template.format(
             content=html, blog_name=self.blog_name).encode('utf-8')
 
