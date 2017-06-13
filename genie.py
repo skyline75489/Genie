@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import os
 import time
 import codecs
 import json
 import logging
+import functools
 
 import mistune
 
@@ -34,8 +37,10 @@ class Post(object):
         if self.filename == 'about':
             self.create_time = time.time()
         else:
-            self.create_time = parse_filename(self.filename)
-            self.create_time_str = time.strftime("%d %b %Y", self.create_time)
+            create_time = parse_filename(self.filename)
+            self.create_time_str = time.strftime("%d %b %Y", create_time)
+
+            self.create_time = time.mktime(create_time)
 
         f = codecs.open(self.src_full_path, mode="r", encoding="utf8")
         # Use the first line as title
@@ -99,11 +104,10 @@ class Genie(object):
             bottom_nav += '<span class="next"><a href="' + \
                 next_page + '">Next</a></span>'
         result = self.index_template.format(
-            content=post_titles, blog_name=self.blog_name, bottom_nav=bottom_nav).encode('utf-8')
+            content=post_titles, blog_name=self.blog_name, bottom_nav=bottom_nav)
 
-        fout = open(self.out_file_path + out_file, "w+")
-        fout.write(result)
-        fout.close()
+        with open(self.out_file_path + out_file, "w+") as f:
+            f.write(result)
 
     def generate_index(self):
         start = 0
@@ -131,11 +135,10 @@ class Genie(object):
     def generate_post(self, text, out_file_name):
         html = mistune.markdown(text, escape=False)
         result = self.blog_template.format(
-            content=html, blog_name=self.blog_name).encode('utf-8')
+            content=html, blog_name=self.blog_name)
 
-        fout = open(out_file_name, "w+")
-        fout.write(result)
-        fout.close()
+        with open(out_file_name, "w+") as f:
+            f.write(result)
 
     def get_templates(self):
         blog_template_file = codecs.open(
@@ -168,7 +171,7 @@ class Genie(object):
 
     def render(self):
         # Sort post in create time ascending
-        self.posts.sort(lambda p1, p2: cmp(p2.create_time, p1.create_time))
+        self.posts.sort(key=lambda p: p.create_time, reverse=True)
         # Generate html for every post we have
         logger('Start rendering')
         for post in self.posts:

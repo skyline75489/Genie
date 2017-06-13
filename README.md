@@ -1,7 +1,7 @@
 Genie
 =====
 
-##The Simplest Static Blog Generator
+## The Simplest Static Blog Generator
 
 ### NOTE: Genie is currently under development and may not be ready for production.
 
@@ -24,7 +24,7 @@ It is inspired by many projects like [Pelican](http://getpelican.com/), [Simple]
 
 ## Requirements
 
-* mistune (pip install mistune)
+* Python 3.4+
 
 ## Installation
 
@@ -65,7 +65,7 @@ Right! Just like writing README.md.
 When you finished your writing, run
 
 ```
-$ python genie.py
+$ python3 genie.py
 ```
 
 If everything goes fine, then well done! You have a new blog site now. It's really easy, isn't it?
@@ -74,7 +74,7 @@ If you want to see what it looks like, you can do this:
 
 ```bash
 $ cd your-dst-path
-$ python -m SimpleHTTPServer
+$ python3 -m http.server
 ```
 
 ## Customize your site!
