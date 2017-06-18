@@ -3,12 +3,36 @@
 }
 
 body {
-    font-family: 微软雅黑, Hiragino Sans GB, serif;
+    font-family: Microsoft YaHei, 微软雅黑, Hiragino Sans GB;
+}
+
+@media (min-width:480px)
+{
+    .wrapper {
+        min-width: 400px !important;
+    }
+
+    .date {
+        font-size: 0.8em;
+    }
+}
+
+@media (min-width:1024px)
+{
+    .wrapper {
+        min-width: 700px !important;
+    }
+
+    .date {
+        font-size: 0.8em;
+        float:right;
+        margin-top:6px;
+    }
 }
 
 .wrapper {
     margin: 2em auto;
-	width: 35em;
+    width: 35em;
     border-color: #DDD;
     border-style: solid;
     border-width: 1px;
@@ -17,17 +41,10 @@ body {
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
-    min-width: 700px !important;
 }
 
 .entry {
     padding: 1em 0px 0.3em;
-}
-
-.date {
-	font-size: 0.8em;
-    float:right;
-    margin-top:6px;
 }
 
 .bottom_nav {

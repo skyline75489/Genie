@@ -3,11 +3,25 @@
 }
 
 body {
-	font-family: 微软雅黑, Hiragino Sans GB, serif;
+    font-family: Microsoft YaHei, 微软雅黑, Hiragino Sans GB;
 }
 
 p {
-    line-height:1.7em;
+    line-height:1.6em;
+}
+
+@media (min-width:480px)
+{
+    .wrapper {
+        min-width: 400px !important;
+    }
+}
+
+@media (min-width:1024px)
+{
+    .wrapper {
+        min-width: 700px !important;
+    }
 }
 
 .wrapper {
@@ -21,7 +35,6 @@ p {
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
-    min-width: 700px !important;
 }
 
 a.nav:visited {
@@ -64,7 +77,6 @@ a.nav:visited {
 pre {
 	line-height: 19px;
 	word-break: break-all;
-	word-wrap: break-word;
 	font-size: 13px;
 	overflow: auto;
 	border-radius: 3px;
@@ -72,13 +84,15 @@ pre {
 
 pre code {
     white-space: pre;
+    display: block;
+    padding: 0.5em;
 }
 
 code, tt {
   margin: 0 2px;
   padding: 0 5px;
   border: 1px solid #eaeaea;
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
   border-radius: 3px;
   font-size:13px;
   white-space: nowrap;
