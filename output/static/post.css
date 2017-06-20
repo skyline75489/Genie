@@ -102,7 +102,6 @@ code, tt {
   background-color: #f8f8f8;
   border-radius: 3px;
   font-size:13px;
-  white-space: nowrap;
   font-family: Menlo, Droid Sans Mono, Consolas, Monospace;
   text-shadow: none;
 }
