@@ -9,8 +9,7 @@ import functools
 
 import mistune
 
-def logger(str):
-    print(str)
+logging.basicConfig(level=logging.INFO)
 
 def parse_filename(filename):
     date = filename.split('_')[0]
@@ -167,17 +166,17 @@ class Genie(object):
         posts_count = len(self.posts)
         if self.about:
             posts_count -= 1
-        logger('Find {0} articles'.format(posts_count))
+        logging.info('Find {0} articles'.format(posts_count))
 
     def render(self):
         # Sort post in create time ascending
         self.posts.sort(key=lambda p: p.create_time, reverse=True)
         # Generate html for every post we have
-        logger('Start rendering')
+        logging.info('Start rendering')
         for post in self.posts:
             raw_text = post.text
             self.generate_post(raw_text, post.dst_full_path)
-        logger('Done')
+        logging.info('Done')
         if self.about:
             self.posts.remove(self.about)
         self.generate_index()
